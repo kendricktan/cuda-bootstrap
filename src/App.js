@@ -17,7 +17,8 @@ const OSSupportedToolkitVersions = {
     'cuda9_0'
   ],
   ubuntu18_04: [
-    'cuda10_0'
+    'cuda10_0',
+    'cuda9_0'
   ]
 }
 
@@ -96,13 +97,14 @@ class App extends Component {
                     if (OSSupportedToolkitVersions[this.state.os] !== undefined && OSSupportedToolkitVersions[this.state.os].indexOf(x.value) !== -1) {
                       return (<option key={x.value} value={x.value}>{x.name}</option>)
                     }
+                    return null
                   })
                 }
               </select>
             </label>
 
             <label>
-              *Only supports x85_64 architecture for now. <br/>
+              *Only supports x86_64 architecture for now. <br/>
               ** <a href='https://github.com/kendricktan/cuda-bootstrap'>Don't see what you need/want? Make a PR!</a>
             </label>
           </form>
