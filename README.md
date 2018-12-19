@@ -1,7 +1,11 @@
 # Cuda-Bootstrap
 
+# Build
+```
+yarn run build
+```
 
 # Dev
 ```
-yarn start
+yarn run start
 ```
