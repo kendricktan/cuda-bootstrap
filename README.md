@@ -1,2 +1,7 @@
-# cuda-bootstrap
-Scripts to bootstrap install CUDA for your DL instances
+# Cuda-Bootstrap
+
+
+# Dev
+```
+yarn start
+```
