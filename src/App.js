@@ -26,12 +26,14 @@ class App extends Component {
     os: null,
     cudaVer: null,
     scriptContent: null,
+    fetching: false
   }
 
   updateSelection = (os, cudaVer) => {
     this.setState({
       os,
-      cudaVer
+      cudaVer,
+      fetching: true
     }, () => {
       this.getScriptContents(`${os}_${cudaVer}`)
     })
@@ -47,14 +49,15 @@ class App extends Component {
     })
     .then(x => {
       this.setState({
-        scriptContent: x
+        scriptContent: x,
+        fetching: false
       })
     })
     .catch(err => {
       this.setState({
-        scriptContent: null
+        scriptContent: null,
+        fetching: false
       })
-      // todo: handle err
     })
   }
 
@@ -110,8 +113,10 @@ class App extends Component {
         <div>
           <h5>One Liner Install</h5>
           <input readOnly style={{ minWidth: '100%'}} value={
-            (this.state.scriptContent === null) ? 'Not available yet...' :
-            `wget https://cuda-bootstrap.com/scripts/${this.state.os}_${this.state.cudaVer}.sh -O - | sudo -E bash`
+            (this.state.fetching) ? 'Loading...' : (
+              (this.state.scriptContent === null) ? 'Not available yet...' :
+              `wget https://cuda-bootstrap.com/scripts/${this.state.os}_${this.state.cudaVer}.sh -O - | sudo -E bash`
+            )
           } />
 
           <h5>Script Contents</h5>
